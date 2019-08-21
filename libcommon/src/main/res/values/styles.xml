@@ -1,0 +1,58 @@
+<resources>
+
+    <style name="AppTheme" parent="BootActivityTheme">
+        <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>
+    </style>
+
+    <style name="BootActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!--<item name="android:windowBackground">@color/transparent</item>-->
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowAnimationStyle">@style/BootActivityAnimation</item>
+    </style>
+
+    <!--&lt;!&ndash;全屏&ndash;&gt;-->
+    <!--<style name="FullScreenTheme" parent="AppTheme.NoActionBar">-->
+        <!--<item name="android:windowActionBarOverlay">true</item>-->
+        <!--<item name="android:windowFullscreen">true</item>-->
+        <!--<item name="android:windowBackground">@null</item>-->
+    <!--</style>-->
+
+    <!--app中activity跳转的动画-->
+    <style name="BootActivityAnimation" parent="@android:style/Animation.Translucent">
+        <item name="android:windowEnterAnimation">@null</item>
+        <item name="android:windowExitAnimation">@null</item>
+        <!--<item name="android:activityOpenEnterAnimation">@anim/common_push_right_in</item>-->
+        <item name="android:activityOpenExitAnimation">@anim/common_push_left_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/common_push_left_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/common_push_right_out</item>
+    </style>
+
+    <!--app中activity跳转的动画-->
+    <style name="ActivityAnimation" parent="@android:style/Animation.Translucent">
+        <item name="android:windowEnterAnimation">@null</item>
+        <item name="android:windowExitAnimation">@null</item>
+        <item name="android:activityOpenEnterAnimation">@anim/common_push_right_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/common_push_left_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/common_push_left_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/common_push_right_out</item>
+    </style>
+
+    <style name="LunchTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:statusBarColor">@color/translucent</item>
+        <item name="android:windowBackground">@color/translucent</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+</resources>

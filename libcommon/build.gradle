@@ -1,0 +1,60 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+    }
+
+    compileOptions {
+        sourceCompatibility rootProject.ext.javaVersion
+        targetCompatibility rootProject.ext.javaVersion
+    }
+
+    buildTypes {
+        release {
+            debuggable true
+            //资源优化
+            zipAlignEnabled false
+            shrinkResources false
+            //混淆
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //support
+    api androidDependencies.appcompat_v7
+    api androidDependencies.design
+    api androidDependencies.support_v4
+    api commonDependencies.constraintLayout
+    //响应式编程框架
+    api commonDependencies.rxjava
+    api commonDependencies.rxandroid
+    //动态权限申请
+    api commonDependencies.rxpermissions
+    //网络请求
+    api commonDependencies.retrofit
+    api commonDependencies.converter_gson
+    api commonDependencies.adapter_rxjava2
+    api commonDependencies.logging_interceptor
+    //滑动返回
+    api commonDependencies.swipebackfragment
+    //保活框架
+    api commonDependencies.keeplive
+    //toast
+    api commonDependencies.Toasty
+    //列表
+    api commonDependencies.BaseRecyclerViewAdapterHelper
+    //路由
+    api commonDependencies.arouter_api
+//    annotationProcessor commonDependencies.arouter_compiler
+}

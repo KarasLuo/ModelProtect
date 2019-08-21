@@ -1,0 +1,78 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.1'
+        
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://maven.google.com" }
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+//AS统一配置版本号（20190819）android studio 3.2.1
+ext{
+    //sdk和build tool
+    buildToolsVersion="28.0.3"
+    compileSdkVersion=28
+    targetSdkVersion=28
+    minSdkVersion=21
+    //java版本
+    javaVersion=JavaVersion.VERSION_1_7
+    //打包程序版本
+    versionCode=1
+    versionName="1.0.0"
+    //依赖包版本
+    supportLibraryVersion = "${compileSdkVersion}.+"
+    /*=================================常用的引用============================================*/
+    androidDependencies = [
+            appcompat_v7 : "com.android.support:appcompat-v7:${supportLibraryVersion}",
+            design        : "com.android.support:design:${supportLibraryVersion}",
+            support_v4    : "com.android.support:support-v4:${supportLibraryVersion}",
+    ]
+    /*=================================module中公共用到的引用================================*/
+    commonDependencies  = [
+            //约束布局
+            constraintLayout : "com.android.support.constraint:constraint-layout:1.1.2",
+            //响应式编程
+            rxjava:"io.reactivex.rxjava2:rxjava:2.2.0",
+            rxandroid:"io.reactivex.rxjava2:rxandroid:2.0.2",
+            //动态权限申请
+            rxpermissions:"com.github.tbruyelle:rxpermissions:0.10.2",
+            //网络请求
+            retrofit:"com.squareup.retrofit2:retrofit:2.4.0",
+            converter_gson:"com.squareup.retrofit2:converter-gson:2.4.0",
+            adapter_rxjava2:"com.squareup.retrofit2:adapter-rxjava2:2.4.0",
+            logging_interceptor:"com.squareup.okhttp3:logging-interceptor:3.4.1",
+            //滑动返回
+            swipebackfragment:"me.yokeyword:swipebackfragment:0.4.0",
+            //列表
+            BaseRecyclerViewAdapterHelper:"com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.47",
+            //路由
+            arouter_api:"com.alibaba:arouter-api:1.5.0",
+            arouter_compiler:"com.alibaba:arouter-compiler:1.2.2",
+            //保活框架
+            keeplive:"com.fanjun:keeplive:1.1.14",
+            //toast
+            Toasty:"com.github.GrenderG:Toasty:1.4.2",
+    ]
+
+}

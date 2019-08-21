@@ -1,0 +1,85 @@
+apply plugin: 'com.android.application'
+
+static def buildTime(){
+    return new Date().format("yyyyMMdd")
+}
+
+android {
+    signingConfigs {
+        joseph {
+            keyAlias 'joseph'
+            keyPassword '100860000'
+            storeFile file('E:/AndroidWorkSpace/Keys/joseph.jks')
+            storePassword '100860000'
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    defaultConfig {
+        applicationId appId
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        //分包
+//        multiDexEnabled false
+        //打包时间
+        resValue "string", "build_time", buildTime()
+    }
+
+    compileOptions {
+        sourceCompatibility rootProject.ext.javaVersion
+        targetCompatibility rootProject.ext.javaVersion
+    }
+
+    buildTypes {
+        release {
+            //资源优化
+            zipAlignEnabled true
+            shrinkResources true
+            //混淆
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //签名
+            signingConfig signingConfigs.joseph
+        }
+        debug {
+            debuggable true
+            //applicationId后缀
+            applicationIdSuffix ".debug"
+            //资源优化
+            zipAlignEnabled false
+            shrinkResources false
+            //混淆
+            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //签名
+            signingConfig signingConfigs.joseph
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def fileName = "${appName}_v${variant.versionName}_" + "${variant.buildType.name}_" + buildTime() + ".apk"
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                outputFileName = fileName
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':libcommon')
+    if (!isModel.toBoolean()) {//集成模式下将【所有组件】依赖
+        implementation project(':modelmain')
+        implementation project(':modeltest')
+    }
+    //test
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
