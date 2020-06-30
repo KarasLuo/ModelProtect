@@ -41,7 +41,6 @@ public abstract class AppActivity extends SwipeBackActivity {
     //获取布局资源ID
     public abstract int getLayoutResId();
     public abstract int getFragmentContainerId();
-    public abstract void onFragmentChanged(String title);
 
     private Disposable rxBusDisposable;
     private AppFragment lastFragment;
@@ -144,7 +143,6 @@ public abstract class AppActivity extends SwipeBackActivity {
         if(fragment!=null){
             lastFragment=fragment;
             Log.i(TAG,"addFragment lastFragment="+lastFragment);
-            onFragmentChanged(lastFragment.getTAG());
             getSupportFragmentManager().beginTransaction()
                     .add(getFragmentContainerId(),fragment,fragment.getTAG())
                     .addToBackStack(((Object)fragment).getClass().getSimpleName())
@@ -158,7 +156,6 @@ public abstract class AppActivity extends SwipeBackActivity {
      */
     public void addFragmentWithAnimations(AppFragment fragment){
         if(fragment!=null){
-            onFragmentChanged(fragment.getTAG());
             int size= getSupportFragmentManager().getFragments().size();
             lastFragment=(AppFragment) (getSupportFragmentManager().getFragments()
                     .get(size-1));
@@ -179,7 +176,6 @@ public abstract class AppActivity extends SwipeBackActivity {
      */
     public boolean removeFragmentWithAnimations(){
         if(getSupportFragmentManager().getBackStackEntryCount()>1){
-            onFragmentChanged(lastFragment.getTAG());
             getSupportFragmentManager().popBackStack();
             Log.i(TAG,"there are more than 1 fragments");
             return false;

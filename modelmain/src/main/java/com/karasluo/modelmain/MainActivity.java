@@ -3,7 +3,6 @@ package com.karasluo.modelmain;
 import android.Manifest;
 import android.content.Intent;
 import android.util.Log;
-import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.karasluo.libcommon.base.AppActivity;
@@ -17,7 +16,6 @@ import io.reactivex.functions.Consumer;
 public class MainActivity extends AppActivity {
     static final private String TAG="MainActivity";
 
-    private TextView toolbarTitle;
     @Override
     public void initData() {
         requestPermission();
@@ -25,7 +23,6 @@ public class MainActivity extends AppActivity {
 
     @Override
     public void initView() {
-        toolbarTitle=(TextView) findViewById(R.id.toolbar_title);
         AppFragment fragment=(AppFragment)ARouter.getInstance()
                 .build("/test/testfragment")
                 .navigation();
@@ -41,12 +38,6 @@ public class MainActivity extends AppActivity {
     public int getFragmentContainerId() {
         return R.id.fragment_container;
     }
-
-    @Override
-    public void onFragmentChanged(String title) {
-        toolbarTitle.setText(title);
-    }
-
     /**
      * 获取动态权限
      */

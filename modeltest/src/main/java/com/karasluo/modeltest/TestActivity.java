@@ -26,8 +26,4 @@ public class TestActivity extends AppActivity {
         return 0;
     }
 
-    @Override
-    public void onFragmentChanged(String title) {
-
-    }
 }
